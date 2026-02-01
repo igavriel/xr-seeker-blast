@@ -80,3 +80,6 @@ crashlytics-build.properties
 
 #  ignore unity version
 ProjectVersion.txt
+
+mono_crash.*
+TempAssembly.*
