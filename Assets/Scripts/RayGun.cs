@@ -13,8 +13,8 @@ public class RayGun : MonoBehaviour
     void Start()
     {
         Util.AssertObject(laserPrefab, "Laser prefab is not assigned");
-        Util.AssertObject(shootingPoint, "Shooting point is not assigned");
-        Util.AssertObject(shootingButton, "Shooting button is not assigned");
+        Util.AssertObject(shootingPoint, "Shooting point is not assigneπd");
+        //Util.AssertObject(shootingButton, "Shooting button is not assigned");
     }
 
     // Update is called once per frame

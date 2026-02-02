@@ -82,4 +82,4 @@ crashlytics-build.properties
 ProjectVersion.txt
 
 mono_crash.*
-TempAssembly.*
+TempAssembly.dll
