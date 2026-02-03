@@ -6,7 +6,7 @@ public class RayGun : MonoBehaviour
     [SerializeField] public LineRenderer laserPrefab;
     [SerializeField] public GameObject rayImpactPrefab;
     [SerializeField] public Transform shootingPoint;
-    [SerializeField] public LayerMask layerMask = LayerMask.NameToLayer("Default");
+    [SerializeField] public LayerMask layerMask;
     [SerializeField] public AudioSource laserSound;
     [SerializeField] public AudioClip laserSoundClip;
     [SerializeField] public float maxDistance = 5f;
