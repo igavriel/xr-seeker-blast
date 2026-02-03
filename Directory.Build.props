@@ -1,0 +1,8 @@
+<Project>
+  <PropertyGroup>
+    <!-- Disable NuGet restore for Unity projects -->
+    <RestorePackages>false</RestorePackages>
+    <RestoreProjectStyle>None</RestoreProjectStyle>
+    <EnableDefaultItems>false</EnableDefaultItems>
+  </PropertyGroup>
+</Project>
