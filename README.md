@@ -1,12 +1,9 @@
 this tutorial build a shooting XR game
 
 Space Gun: https://skfb.ly/6w97U
+ID-9 Seeker Droid: https://skfb.ly/osPwt
+
 laser sound: Medium_laser_shoot https://freesound.org/s/814253/
-
-ghost buster slimer: https://skfb.ly/6TGsD
-
-
-
 
 
 based on this tutorial https://www.youtube.com/watch?v=pZ5vLcyjois
@@ -38,4 +35,3 @@ Create laser line prefab and add it to the gun game object.
 
 Add Effect Mesh block to the gun game object, this will add the MRUK to the project.
 in the EffectMesh check the "Colliders" and "Hide Mesh" options
-
