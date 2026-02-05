@@ -47,12 +47,18 @@ public class Spawner : MonoBehaviour
         MRUKRoom room = MRUK.Instance.GetCurrentRoom();
         for (int i = 0; i < spawnTryCount; i++)
         {
-            bool success = room.GenerateRandomPositionOnSurface(MRUK.SurfaceType.VERTICAL, distanceToEdge,
-                LabelFilter.Included(spawnLabels), out Vector3 position, out Vector3 normal);
+            bool success = room.GenerateRandomPositionOnSurface(
+                MRUK.SurfaceType.VERTICAL,
+                distanceToEdge,
+                LabelFilter.Included(spawnLabels),
+                out Vector3 position,
+                out Vector3 normal);
 
             if (success)
             {
                 Vector3 randomPosition = position + normal * normalOffset;
+                randomPosition.y = 0f;  // force at the same y level
+
                 Quaternion rotation = Quaternion.Euler(0f, Random.Range(0f, 360f), 0f);
                 Debug.Log("Spawner - Spawning object at " + randomPosition + " with rotation " + rotation);
                 Instantiate(objectToSpawn, randomPosition, rotation);
