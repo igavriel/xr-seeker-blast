@@ -12886,7 +12886,7 @@ GameObject:
   - component: {fileID: 2053621142}
   - component: {fileID: 2053621143}
   m_Layer: 0
-  m_Name: Spawner-Wall
+  m_Name: Spawner-WallHouses
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -12919,7 +12919,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 549d138ce45f2486ab667a2f7d8c0531, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SpawnerWall
-  housePrefab: {fileID: 5336893660241286053, guid: 0dd1566a4a2d0ae4f9a721129aef0ef1, type: 3}
+  housePrefabs:
+  - {fileID: 5336893660241286053, guid: 0dd1566a4a2d0ae4f9a721129aef0ef1, type: 3}
+  - {fileID: 1607115434301704998, guid: c820a5030e78c5c4db1e5227c4c9832a, type: 3}
+  - {fileID: 2393612341936798797, guid: 18ab0fe3b83ee954aa5e8eda58672eef, type: 3}
+  - {fileID: 153517961919811645, guid: 13678a5d161ba864aa05b2fa19a9f18d, type: 3}
+  - {fileID: 7657433080926197070, guid: f5610e1db9ec75d4a8314605bf8e59d3, type: 3}
   wallInset: 0.01
   wallNormalDirection: 1
   houseDepthBeyondWall: 1.5

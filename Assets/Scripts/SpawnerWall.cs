@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SpawnerWall : MonoBehaviour
 {
-    [SerializeField] public GameObject housePrefab;
+    [SerializeField] public GameObject[] housePrefabs;
 
     [Tooltip("Offset along wall normal: negative = house slightly behind wall plane (avoids z-fight).")]
     [SerializeField] public float wallInset = -0.01f;
@@ -22,11 +22,10 @@ public class SpawnerWall : MonoBehaviour
 
     private bool _spawned;
     private Vector3 _houseSize;
-    private bool _houseSizeCached;
 
     void Start()
     {
-        UnityEngine.Assertions.Assert.IsNotNull(housePrefab, "SpawnerWall: housePrefab is not assigned");
+        UnityEngine.Assertions.Assert.IsTrue(housePrefabs.Length > 0, "SpawnerWall: housePrefabs is empty");
     }
 
     void Update()
@@ -100,16 +99,13 @@ public class SpawnerWall : MonoBehaviour
             wallWidth = anchorSize.x;
         }
 
-        // House prefab size
-        if (!_houseSizeCached)
-        {
-            GetPrefabSize(housePrefab, out _houseSize);
-            _houseSizeCached = true;
-        }
+        GameObject housePrefab = housePrefabs[Random.Range(0, housePrefabs.Length)];
+        Vector3 houseSize = Vector3.zero;
+        GetPrefabSize(housePrefab, out houseSize);
 
-        float houseW = Mathf.Max(0.01f, _houseSize.x);
-        float houseH = Mathf.Max(0.01f, _houseSize.y);
-        float houseD = Mathf.Max(0.01f, _houseSize.z);
+        float houseW = Mathf.Max(0.01f, houseSize.x);
+        float houseH = Mathf.Max(0.01f, houseSize.y);
+        float houseD = Mathf.Max(0.01f, houseSize.z);
 
         // Scale: width = wall; height = scaleHouseY; depth = houseDepthBeyondWall
         float scaleX = wallWidth / houseW;
