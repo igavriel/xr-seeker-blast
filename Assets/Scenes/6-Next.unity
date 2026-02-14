@@ -6708,7 +6708,7 @@ GameObject:
   - component: {fileID: 1030380287}
   - component: {fileID: 1030380286}
   m_Layer: 0
-  m_Name: Spawner
+  m_Name: Spawner-Enemies
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6727,12 +6727,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   spawnLabels: 4
-  objectToSpawn: {fileID: 1700433273508270880, guid: e41e40f7c55174355bc98a67a2cd90e1, type: 3}
+  objectToSpawn:
+  - {fileID: 7754526169361155524, guid: cfce8db03f94f458aa83899d16aba8a4, type: 3}
+  - {fileID: 7754526169361155524, guid: 39c06221ef63b49838d187e906e532a8, type: 3}
   minSpawnInterval: 2
   maxSpawnInterval: 5
   distanceToEdge: 0.3
   normalOffset: 0.5
-  maxSpawnedObjects: 5
+  maxSpawnedObjects: 6
   spawnTryCount: 100
 --- !u!4 &1030380287
 Transform:
@@ -7231,7 +7233,7 @@ MonoBehaviour:
   - WallU: 5
     WallV: 2
     AnchorUV: 1
-  Labels: 442367
+  Labels: 4
 --- !u!114 &1102759808
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10116,7 +10118,7 @@ MonoBehaviour:
   m_OverrideTileSize: 0
   m_TileSize: 256
   m_OverrideVoxelSize: 0
-  m_VoxelSize: 0.16666667
+  m_VoxelSize: 0.033333335
   m_MinRegionArea: 2
   m_NavMeshData: {fileID: 0}
   m_BuildHeightMesh: 0
@@ -13298,6 +13300,10 @@ PrefabInstance:
     - target: {fileID: 1752415751249920056, guid: da939f86efda649cbafc9df0a669e733, type: 3}
       propertyPath: m_Name
       value: Laser Gun
+      objectReference: {fileID: 0}
+    - target: {fileID: 1752415751249920056, guid: da939f86efda649cbafc9df0a669e733, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5544374546990278978, guid: da939f86efda649cbafc9df0a669e733, type: 3}
       propertyPath: m_LocalPosition.x

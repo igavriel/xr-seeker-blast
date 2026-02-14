@@ -3,8 +3,8 @@ using UnityEngine;
 
 public class Spawner : MonoBehaviour
 {
-    [SerializeField] public MRUKAnchor.SceneLabels spawnLabels;
-    [SerializeField] public GameObject objectToSpawn;
+    [SerializeField] public MRUKAnchor.SceneLabels spawnLabels = MRUKAnchor.SceneLabels.WALL_FACE;
+    [SerializeField] public GameObject[] objectToSpawn;
     [SerializeField] public float minSpawnInterval = 2f;
     [SerializeField] public float maxSpawnInterval = 5f;
     [SerializeField] public float distanceToEdge = 0.3f;
@@ -18,7 +18,7 @@ public class Spawner : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        Util.AssertObject(objectToSpawn, "Spawner - Object to spawn is not assigned");
+        UnityEngine.Assertions.Assert.IsNotNull(objectToSpawn[0], "Spawner - Object to spawn is not assigned");
     }
 
     // Update is called once per frame
@@ -61,7 +61,7 @@ public class Spawner : MonoBehaviour
 
                 Quaternion rotation = Quaternion.Euler(0f, Random.Range(0f, 360f), 0f);
                 Debug.Log("Spawner - Spawning object at " + randomPosition + " with rotation " + rotation);
-                Instantiate(objectToSpawn, randomPosition, rotation);
+                Instantiate(objectToSpawn[Random.Range(0, objectToSpawn.Length)], randomPosition, rotation);
                 return;
             }
         }
