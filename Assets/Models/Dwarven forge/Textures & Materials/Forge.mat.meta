@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: cad5542b650ded74bba166ffa26fe158
+timeCreated: 1458398172
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 58693
+  packageName: Dwarven forge
+  packageVersion: 1.0
+  assetPath: Assets/Dwarven forge/Textures & Materials/Forge.mat
+  uploadId: 108545

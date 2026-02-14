@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: b392f0959745c68438458a3523b44363
+timeCreated: 1458398358
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 58693
+  packageName: Dwarven forge
+  packageVersion: 1.0
+  assetPath: Assets/Dwarven forge/Dwarven_forge.prefab
+  uploadId: 108545

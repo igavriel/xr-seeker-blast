@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 5229c8e61d8d32d46bc3122696702383
+timeCreated: 1458398179
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 58693
+  packageName: Dwarven forge
+  packageVersion: 1.0
+  assetPath: Assets/Dwarven forge/Textures & Materials/Stone.mat
+  uploadId: 108545
