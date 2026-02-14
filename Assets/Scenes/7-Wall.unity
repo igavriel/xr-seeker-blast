@@ -12884,7 +12884,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2053621142}
-  - component: {fileID: 2053621141}
+  - component: {fileID: 2053621143}
   m_Layer: 0
   m_Name: Spawner-Wall
   m_TagString: Untagged
@@ -12892,28 +12892,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &2053621141
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2053621140}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 25b06bcf8ef0b4802967dbc44c0e8d77, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: '::'
-  spawnLabels: 4
-  objectToSpawn:
-  - {fileID: 7754526169361155524, guid: cfce8db03f94f458aa83899d16aba8a4, type: 3}
-  - {fileID: 7754526169361155524, guid: 39c06221ef63b49838d187e906e532a8, type: 3}
-  minSpawnInterval: 2
-  maxSpawnInterval: 5
-  distanceToEdge: 0.3
-  normalOffset: 0.5
-  maxSpawnedObjects: 6
-  spawnTryCount: 100
 --- !u!4 &2053621142
 Transform:
   m_ObjectHideFlags: 0
@@ -12929,6 +12907,22 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2053621143
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2053621140}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 549d138ce45f2486ab667a2f7d8c0531, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SpawnerWall
+  brickPrefab: {fileID: 7880666805187038812, guid: 7ed71273ba84e4ec19541663a3d90e5a, type: 3}
+  brickWidth: 1
+  brickHeight: 1
+  wallInset: 0.01
 --- !u!1 &2054133613
 GameObject:
   m_ObjectHideFlags: 0
