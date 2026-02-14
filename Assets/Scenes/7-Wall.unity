@@ -12921,8 +12921,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SpawnerWall
   housePrefab: {fileID: 5336893660241286053, guid: 0dd1566a4a2d0ae4f9a721129aef0ef1, type: 3}
   wallInset: 0.01
+  wallNormalDirection: 1
   houseDepthBeyondWall: 1.5
   scaleHouseY: 0.5
+  hideWall: 1
 --- !u!1 &2054133613
 GameObject:
   m_ObjectHideFlags: 0
