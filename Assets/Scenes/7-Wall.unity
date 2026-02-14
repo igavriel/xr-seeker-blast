@@ -12919,10 +12919,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 549d138ce45f2486ab667a2f7d8c0531, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SpawnerWall
-  brickPrefab: {fileID: 7880666805187038812, guid: 7ed71273ba84e4ec19541663a3d90e5a, type: 3}
-  brickWidth: 1
-  brickHeight: 1
+  housePrefab: {fileID: 5336893660241286053, guid: 0dd1566a4a2d0ae4f9a721129aef0ef1, type: 3}
   wallInset: 0.01
+  houseDepthBeyondWall: 1.5
+  scaleHouseY: 0.5
 --- !u!1 &2054133613
 GameObject:
   m_ObjectHideFlags: 0

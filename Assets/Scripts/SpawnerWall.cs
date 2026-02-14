@@ -4,28 +4,34 @@ using UnityEngine;
 
 public class SpawnerWall : MonoBehaviour
 {
-    [SerializeField] private GameObject brickPrefab;
-    [SerializeField] private float wallInset = 0.01f;
+    [SerializeField] public GameObject housePrefab;
 
-    private bool spawned = false;
-    private float _brickWidth = 1f;
-    private float _brickHeight = 1f;
-    private bool _brickSizeCached;
+    [Tooltip("Small offset so the house front face sits flush on the wall (negative = into room).")]
+    [SerializeField] public float wallInset = 0f;
+
+    [Tooltip("Depth of the house beyond the wall in world units (how far it extends outside the room).")]
+    [SerializeField] public float houseDepthBeyondWall = 1.5f;
+    [Tooltip("Scale factor for house height. House starts from room floor and height = prefab height × scaleHouseY.")]
+    [SerializeField] public float scaleHouseY = 1f;
+
+    private bool _spawned;
+    private Vector3 _houseSize;
+    private bool _houseSizeCached;
 
     void Start()
     {
-        UnityEngine.Assertions.Assert.IsNotNull(brickPrefab, "SpawnerWall: brickPrefab is not assigned");
+        UnityEngine.Assertions.Assert.IsNotNull(housePrefab, "SpawnerWall: housePrefab is not assigned");
     }
 
     void Update()
     {
-        if (!MRUK.Instance || !MRUK.Instance.IsInitialized)
-            return;
-
-        if (!spawned)
+        if (!_spawned)
         {
+            if (!MRUK.Instance || !MRUK.Instance.IsInitialized)
+                return;
+
             SpawnObject();
-            spawned = true;
+            _spawned = true;
         }
     }
 
@@ -51,83 +57,86 @@ public class SpawnerWall : MonoBehaviour
         }
 
         foreach (var wall in wallAnchors)
-            SpawnOneBrickBottomLeft(wall);
+            SpawnHouseOnWall(wall);
     }
 
-    void SpawnOneBrickBottomLeft(MRUKAnchor wallAnchor)
+    void SpawnHouseOnWall(MRUKAnchor wallAnchor)
     {
         Transform wallTransform = wallAnchor.transform;
 
-        // Wall size from MRUK (PlaneRect = local 2D bounds; Unity Rect: x,y = min corner, width/height = size)
+        // Wall size and bottom edge from MRUK (floor level = wall bottom in local Y)
         float wallWidth = 2f;
-        float wallHeight = 2.5f;
-        float wallMinX = -1f;
-        float wallMinY = -1.25f;
+        float wallMinY;
 
         if (wallAnchor.PlaneRect.HasValue)
         {
             Rect r = wallAnchor.PlaneRect.Value;
             wallWidth = r.width;
-            wallHeight = r.height;
-            wallMinX = r.x;
-            wallMinY = r.y;
+            wallMinY = r.y; // Rect.y = bottom edge
         }
         else
         {
             Vector3 anchorSize = wallAnchor.GetAnchorSize();
             wallWidth = anchorSize.x;
-            wallHeight = anchorSize.y;
-            wallMinX = -wallWidth * 0.5f;
-            wallMinY = -wallHeight * 0.5f;
+            wallMinY = -anchorSize.y * 0.5f;
         }
 
-        // Brick size from prefab (original prefab size – the smaller one)
-        if (!_brickSizeCached)
+        // Room floor level in world Y (wall bottom)
+        Vector3 wallBottomWorld = wallTransform.TransformPoint(0f, wallMinY, 0f);
+        float floorWorldY = wallBottomWorld.y;
+
+        // House prefab size
+        if (!_houseSizeCached)
         {
-            GetBrickSize(out _brickWidth, out _brickHeight);
-            _brickSizeCached = true;
+            GetPrefabSize(housePrefab, out _houseSize);
+            _houseSizeCached = true;
         }
-        float brickWidth = _brickWidth;
-        float brickHeight = _brickHeight;
 
-        // One brick at bottom-left: center so that bottom-left of brick aligns with bottom-left of wall
-        float localX = wallMinX + brickWidth * 0.5f;
-        float localY = wallMinY + brickHeight * 0.5f;
+        float houseW = Mathf.Max(0.01f, _houseSize.x);
+        float houseH = Mathf.Max(0.01f, _houseSize.y);
+        float houseD = Mathf.Max(0.01f, _houseSize.z);
 
-        Vector3 localPos =
-            wallTransform.right * localX +
-            wallTransform.up * localY +
-            wallTransform.forward * wallInset;
+        // Scale: width = wall; height = scaleHouseY; depth = houseDepthBeyondWall
+        float scaleX = wallWidth / houseW;
+        float scaleY = scaleHouseY;
+        float scaleZ = houseDepthBeyondWall / houseD;
+        Vector3 scale = new Vector3(scaleX, scaleY, scaleZ);
 
-        Vector3 worldPos = wallTransform.TransformPoint(localPos);
-        Quaternion worldRot = wallTransform.rotation;
+        // House height in world after scaling
+        float houseHeightWorld = houseH * scaleHouseY;
 
-        GameObject brick = Instantiate(brickPrefab, worldPos, worldRot, wallTransform);
-        brick.name = "brick_bottomLeft";
+        // Position: house bottom on room floor; center = floor + half height
+        Vector3 wallCenter = wallTransform.position;
+        Vector3 outward = -wallTransform.forward;
+        float depthWorld = houseDepthBeyondWall;
+
+        Vector3 houseCenter = wallCenter
+            + outward * (depthWorld * 0.5f)
+            + wallTransform.forward * wallInset;
+        houseCenter.y = floorWorldY + houseHeightWorld * 0.5f;
+
+        Quaternion houseRot = wallTransform.rotation;
+        GameObject house = Instantiate(housePrefab, houseCenter, houseRot);
+        house.name = "house_wall_" + wallAnchor.name;
+        house.transform.localScale = scale;
     }
 
-    void GetBrickSize(out float width, out float height)
+    static void GetPrefabSize(GameObject prefab, out Vector3 size)
     {
-        width = 1f;
-        height = 1f;
+        size = Vector3.one;
 
-        GameObject temp = Instantiate(brickPrefab);
+        GameObject temp = Object.Instantiate(prefab);
         Renderer r = temp.GetComponentInChildren<Renderer>();
         if (r != null)
         {
-            Bounds b = r.bounds;
-            width = b.size.x;
-            height = b.size.y;
+            size = r.bounds.size;
         }
         else
         {
             Collider c = temp.GetComponentInChildren<Collider>();
             if (c != null)
-            {
-                width = c.bounds.size.x;
-                height = c.bounds.size.y;
-            }
+                size = c.bounds.size;
         }
-        Destroy(temp);
+        Object.Destroy(temp);
     }
 }
